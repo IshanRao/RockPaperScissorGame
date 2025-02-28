@@ -10,12 +10,12 @@ function App() {
 
   // To generate a random number within a range use this formula 
   // Math.floor(Math.random() * (max - min + 1)) + min;
-  const generateComputerChoice = () => Math.floor(Math.random()*3);
+  const generateComputerChoice = () => Math.floor(Math.random()*gameWeaponChoices.length);
 
   const onUserChoiceSelection = (event) => {
 
     const computerChoice = gameWeaponChoices[generateComputerChoice()];
-    const userChoice = gameWeaponChoices[Number(event.target.value)];
+    const userChoice = gameWeaponChoices[Number(event.target.value)];``
     setChoice({
       userChoice: userChoice,
       computerChoice: computerChoice
@@ -80,21 +80,24 @@ function App() {
       </table>
       <h2>Choose your weapon</h2>
       <div className="button-group">
-        <button value="0" onClick={onUserChoiceSelection}>{gameWeaponChoices[0]}</button>
-        <button value="1" onClick={onUserChoiceSelection}>{gameWeaponChoices[1]}</button>
-        <button value="2" onClick={onUserChoiceSelection}>{gameWeaponChoices[2]}</button>
+        {gameWeaponChoices.map((weapon, index) => <button value={index} onClick={onUserChoiceSelection}>{weapon}</button>)}
       </div>
-      <table>
-        <tr>
-          <td>You chose:</td>
-          <td>Computer chose:</td>
-        </tr>
-        <tr>
-          <td>{choice.userChoice}</td>
-          <td>{choice.computerChoice}</td>
-        </tr>
-      </table>
-      <p>{winner}</p>
+      {choice.userChoice && (
+        <>
+          <table>
+            <tr>
+              <td>You chose:</td>
+              <td>Computer chose:</td>
+            </tr>
+            <tr>
+              <td>{choice.userChoice}</td>
+              <td>{choice.computerChoice}</td>
+            </tr>
+          </table>
+          <p>{winner}</p>
+        </>
+      )}
+      
       <button onClick={resetGame}>RESET</button>
     </>
   )
