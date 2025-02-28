@@ -51,6 +51,18 @@ function App() {
     if([gameWeaponChoices[0],gameWeaponChoices[2]].includes(choice1) && [gameWeaponChoices[0],gameWeaponChoices[2]].includes(choice2)) return gameWeaponChoices[0];
   }
 
+  const resetGame = () => {
+    setScore({
+      user: 0,
+      computer: 0
+    });
+    setChoice({
+      userChoice: '',
+      computerChoice: ''
+    });
+    setWinner('');
+  }
+
 
   return (
     <>
@@ -83,7 +95,7 @@ function App() {
         </tr>
       </table>
       <p>{winner}</p>
-      <button onClick={() => {}}>RESET</button>
+      <button onClick={resetGame}>RESET</button>
     </>
   )
 }
