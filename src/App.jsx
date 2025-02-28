@@ -4,6 +4,7 @@ import './App.css';
 function App() {
   const [score, setScore] = useState({user: 0, computer: 0});
   const [choice, setChoice] = useState({userChoice: '', computerChoice: ''});
+  const [winner, setWinner] = useState('');
 
   const gameWeaponChoices = ['Rock','Paper','Scissors'];
 
@@ -12,13 +13,42 @@ function App() {
   const generateComputerChoice = () => Math.floor(Math.random()*3);
 
   const onUserChoiceSelection = (event) => {
+
     const computerChoice = gameWeaponChoices[generateComputerChoice()];
     const userChoice = gameWeaponChoices[Number(event.target.value)];
-
     setChoice({
       userChoice: userChoice,
       computerChoice: computerChoice
     })
+
+    if(userChoice === computerChoice){
+      setWinner(`It's a Tie!`);
+      return;
+    }
+
+    const winingChoice = getWinner(userChoice,computerChoice);
+    if(winingChoice === userChoice){
+      setWinner('You Win!');
+      setScore({
+        ...score,
+        user: score.user + 1
+      })
+    } 
+    else{
+      setWinner('Computer Wins!');
+      setScore({
+        ...score,
+        computer: score.computer + 1
+      })
+    }
+
+  }
+
+  const getWinner = (choice1, choice2) => {
+    // Decide winner when choices are different
+    if([gameWeaponChoices[0],gameWeaponChoices[1]].includes(choice1) && [gameWeaponChoices[0],gameWeaponChoices[1]].includes(choice2)) return gameWeaponChoices[1];
+    if([gameWeaponChoices[1],gameWeaponChoices[2]].includes(choice1) && [gameWeaponChoices[1],gameWeaponChoices[2]].includes(choice2)) return gameWeaponChoices[2];
+    if([gameWeaponChoices[0],gameWeaponChoices[2]].includes(choice1) && [gameWeaponChoices[0],gameWeaponChoices[2]].includes(choice2)) return gameWeaponChoices[0];
   }
 
 
@@ -52,7 +82,7 @@ function App() {
           <td>{choice.computerChoice}</td>
         </tr>
       </table>
-      <p>{'YOU WIN'}</p>
+      <p>{winner}</p>
       <button onClick={() => {}}>RESET</button>
     </>
   )
