@@ -66,7 +66,7 @@ function App() {
 
   return (
     <>
-      <h1>Rock Paper Scissor</h1>
+      <h1 class="text-3xl font-bold underline">Rock Paper Scissor</h1>
       <h2>Score</h2>
       <table>
         <tr>
