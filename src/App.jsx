@@ -65,41 +65,58 @@ function App() {
 
 
   return (
-    <>
-      <h1 class="text-3xl font-bold underline">Rock Paper Scissor</h1>
-      <h2>Score</h2>
-      <table>
-        <tr>
-          <td>You</td>
-          <td>Computer</td>
-        </tr>
-        <tr>
-          <td>{score.user}</td>
-          <td>{score.computer}</td>
-        </tr>
-      </table>
-      <h2>Choose your weapon</h2>
-      <div className="button-group">
-        {gameWeaponChoices.map((weapon, index) => <button value={index} onClick={onUserChoiceSelection}>{weapon}</button>)}
+    <div className="flex flex-col items-center absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-gray-100 p-4">
+      <h1 className="text-5xl font-bold text-blue-600 mb-6">Rock Paper Scissor</h1>
+      <div className="bg-white shadow-md rounded-lg w-full max-w-md p-4 mb-6">
+        <h2 className="text-2xl font-semibold text-center text-white bg-blue-500 p-2 rounded-t-lg">Score</h2>
+        <table className="w-full text-center border-collapse">
+          <tbody>
+            <tr className="bg-gray-200">
+              <td className="p-2 border-b border-r">You</td>
+              <td className="p-2 border-b">Computer</td>
+            </tr>
+            <tr>
+              <td className="p-2 border-r">{score.user}</td>
+              <td className="p-2">{score.computer}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <h2 className="text-2xl font-semibold mb-4">Choose your weapon</h2>
+      <div className="flex space-x-4 mb-6">
+        {gameWeaponChoices.map((weapon, index) => (
+          <button
+            key={index}
+            value={index}
+            onClick={onUserChoiceSelection}
+          >
+            {weapon}
+          </button>
+        ))}
       </div>
       {choice.userChoice && (
-        <>
-          <table>
-            <tr>
-              <td>You chose:</td>
-              <td>Computer chose:</td>
-            </tr>
-            <tr>
-              <td>{choice.userChoice}</td>
-              <td>{choice.computerChoice}</td>
-            </tr>
+        <div className="bg-white shadow-md rounded-lg w-full max-w-md p-4 mb-6">
+          <table className="w-full text-center border-collapse">
+            <tbody>
+              <tr className="bg-gray-200">
+                <td className="p-2 border-b border-r">You chose:</td>
+                <td className="p-2 border-b">Computer chose:</td>
+              </tr>
+              <tr>
+                <td className="p-2 border-r">{choice.userChoice}</td>
+                <td className="p-2">{choice.computerChoice}</td>
+              </tr>
+            </tbody>
           </table>
-          <p>{winner}</p>
-        </>
+          <p className="text-xl font-semibold text-center mt-4">{winner}</p>
+        </div>
       )}
-      
-      <button onClick={resetGame}>RESET</button>
-    </>
+      <button
+        onClick={resetGame}
+      >
+        RESET
+      </button>
+    </div>
   )
 }
 
